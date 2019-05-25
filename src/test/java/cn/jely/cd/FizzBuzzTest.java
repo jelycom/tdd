@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class FizzBuzzTest {
     @DataProvider
     public Object[][] param() {
-        return new Object[][]{{1, "1"}, {3, "Fizz"},{5,"Buzz"}};
+        return new Object[][]{{1, "1"}, {3, "Fizz"},{5,"Buzz"},{15,"FizzBuzz"}};
     }
     @Test(dataProvider = "param")
     public void fizzBuzzTest(int i,String expected) {
