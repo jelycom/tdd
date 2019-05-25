@@ -8,7 +8,7 @@ public class FizzBuzzTest {
     public Object[][] param() {
         return new Object[][]{{1, "1"}, {3, "Fizz"}};
     }
-    @Test
+    @Test(dataProvider = "param")
     public void fizzBuzzTest(int i,String expected) {
         FizzBuzz fizzBuzz = new FizzBuzz();
         String result = fizzBuzz.convert(i);
