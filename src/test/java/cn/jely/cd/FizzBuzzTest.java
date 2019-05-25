@@ -9,4 +9,10 @@ public class FizzBuzzTest {
         String result = fizzBuzz.convert(1);
         Assert.assertEquals(result, "1");
     }
+    @Test
+    public void when_3_then_str_fizz() {
+        FizzBuzz fizzBuzz = new FizzBuzz();
+        String result = fizzBuzz.convert(3);
+        Assert.assertEquals(result,"Fizz");
+    }
 }
