@@ -1,3 +1,4 @@
+package cn.jely.cd;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
