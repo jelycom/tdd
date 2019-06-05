@@ -16,7 +16,7 @@ public class ArgsTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void unknowOptionWhenParseThenThrowException() {
         ArgsParser argsParser = getArgParser();
-        argsParser.parse(new String[]{"-x"});
+        argsParser.parse(new String[]{"-j"});
     }
     private ArgsParser getArgParser() {
         return new ArgsParser();
