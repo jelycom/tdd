@@ -72,4 +72,23 @@ public class RoverTest {
         origin.execute(command);
         Assert.assertEquals(origin,expected);
     }
+
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void executeInvalidCmd() {
+        Rover rover = new Rover(mars, 200, 200, Direction.North);
+        rover.execute("L:L:X");
+    }
+    @DataProvider(name = "executeOutBoundary")
+    public Object[][] executeOutBoundary() {
+        return new Object[][]{{new Rover(mars, mars.getMaxX(), mars.getMaxY(), Direction.North), "F,20", new Rover(mars, mars.getMaxX(), 19, Direction.North)},
+                {new Rover(mars,mars.getMaxX(),mars.getMaxY(), Direction.East), "F,3", new Rover(mars,  2,mars.getMaxY(), Direction.East)},
+                {new Rover(mars,0,0, Direction.South), "F,3", new Rover(mars,0,  mars.getMaxY()-2, Direction.South)},
+                {new Rover(mars,0,0, Direction.West), "F,3", new Rover(mars,  mars.getMaxX()-2, 0,Direction.West)},
+        };
+    }
+    @Test(dataProvider = "executeOutBoundary")
+    public void executeOutBoundary(Rover origin,String command,Rover expected) {
+        origin.execute(command);
+        Assert.assertEquals(origin,expected);
+    }
 }

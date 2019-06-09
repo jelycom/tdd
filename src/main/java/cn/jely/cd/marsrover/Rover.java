@@ -8,43 +8,11 @@ public class Rover {
     private int y;
     private Direction direction;
     public Rover(Mars mars, int x, int y, Direction direction) {
-        setMars(mars);
-        setX(x);
-        setY(y);
-        setDirection(direction);
-    }
-    public Mars getMars() {
-        return mars;
-    }
-
-    public void setMars(Mars mars) {
         this.mars = mars;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
         this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
         this.y = y;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Direction direction) {
         this.direction = direction;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,11 +38,21 @@ public class Rover {
     }
 
     public void addY(int step) {
-        setY(getY() + step);
+        y+=step;
+        if (y < 0) {
+            y = mars.getMaxY() + 1 + y;
+        } else if (y > mars.getMaxY()) {
+            y = y - mars.getMaxY() -1;
+        }
     }
 
     public void addX(int step) {
-        setX(getX() + step);
+        x+=step;
+        if (x < 0) {
+            x = mars.getMaxX() + x + 1;
+        } else if (x > mars.getMaxX()) {
+            x = x - mars.getMaxX() - 1;
+        }
     }
 
     public void turnLeft() {
@@ -117,5 +95,9 @@ public class Rover {
         sb.append(", direction=").append(direction);
         sb.append('}');
         return sb.toString();
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }
