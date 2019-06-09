@@ -7,8 +7,8 @@ public abstract class ArgSchemaTest {
     public abstract void schemaSupport();
 
     @Test
-    public abstract void booleanSchemaDefaultValue();
+    public abstract void schemaDefaultValue();
 
     @Test
-    public abstract void booleanSchemaNoDefaultValue();
+    public abstract void schemaNoDefaultValue();
 }

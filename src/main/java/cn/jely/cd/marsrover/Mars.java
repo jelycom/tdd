@@ -23,7 +23,8 @@ public class Mars {
     }
 
     public void setMaxY(int maxY) {
-        if(maxX<0) throw new IllegalArgumentException("maxX cannot be negative");
+        if(maxY<0) throw new IllegalArgumentException("maxY cannot be negative");
         this.maxY = maxY;
     }
+
 }

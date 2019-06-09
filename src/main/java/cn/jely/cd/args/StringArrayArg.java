@@ -1,28 +1,32 @@
 package cn.jely.cd.args;
 
-public class PortArg extends Arg<Integer> {
-    public PortArg() {
+public class StringArrayArg extends Arg<String[]> {
+    public StringArrayArg() {
     }
 
-    public PortArg(Integer defaultValue, boolean nullAble) {
+    public StringArrayArg(String [] defaultValue, boolean nullAble) {
         super(defaultValue);
     }
 
     @Override
     public void setValue(String value) {
-        try {
-            this.value = Integer.valueOf(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("InCorrect Param Value,like:80");
-        }
+        this.value = valueFromStr(value);
     }
 
     @Override
     public void setDefaultValue(String defaultValue) {
+        this.defaultValue = valueFromStr(defaultValue);
+    }
+
+    private String[] valueFromStr(String defaultValue) {
         try {
-            this.defaultValue = Integer.valueOf(defaultValue);
+            if (defaultValue == null || "".equals(defaultValue)||"[]".equals(defaultValue)) {
+                return new String[]{};
+            } else {
+                return defaultValue.split(",");
+            }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("InCorrect Param Value,like:80");
+            throw new IllegalArgumentException("InCorrect Param Value,like:[a,b,c,d]");
         }
     }
 

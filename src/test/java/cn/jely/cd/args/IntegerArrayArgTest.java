@@ -2,31 +2,30 @@ package cn.jely.cd.args;
 
 import org.testng.Assert;
 
-public class StringArrayArgTest extends ArgTest {
+public class IntegerArrayArgTest extends ArgTest {
 
     @Override
     public void newArgSetDefaultValueWhenGetValueThenReturnDefaultValue() {
-        StringArrayArg arg = (StringArrayArg) getArgParser();
+        IntegerArrayArg arg = getArg();
         arg.setDefaultValue("");
         Assert.assertEquals(arg.getValue(),new String[]{});
     }
 
     @Override
     public void setCorrectValueWhenGetValueThenReturnCorrectValue() {
-        StringArrayArg arg = (StringArrayArg) getArgParser();
-        arg.setValue("a,d");
-        Assert.assertEquals(arg.getValue(),"a,d".split(","));
+        IntegerArrayArg arg = getArg();
+        arg.setValue("1,2");
+        Assert.assertEquals(arg.getValue(),new Integer[]{1,2});
     }
 
     @Override
     public void setInCorrectValueThenThrowException() {
-        throw new IllegalArgumentException();
-//        StringArrayArg arg = (StringArrayArg) getArgParser();
-//        arg.setValue(new String());
+        IntegerArrayArg arg = getArg();
+        arg.setValue("a,b");
     }
 
     @Override
-    protected Arg getArgParser() {
-        return new StringArrayArg();
+    protected IntegerArrayArg getArg() {
+        return new IntegerArrayArg();
     }
 }

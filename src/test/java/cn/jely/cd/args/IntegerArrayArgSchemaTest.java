@@ -2,28 +2,28 @@ package cn.jely.cd.args;
 
 import org.testng.Assert;
 
-public class StringArrayArgSchemaTest extends ArgSchemaTest{
+public class IntegerArrayArgSchemaTest extends ArgSchemaTest{
     @Override
     public void schemaSupport() {
         ArgSchema argSchema = getArgSchema();
-        boolean support = argSchema.support("-g:[String]:[]");
+        boolean support = argSchema.support("-x:[Integer]:[]");
         Assert.assertEquals(support,true);
     }
     @Override
     public void schemaDefaultValue() {
-        StringArrayArgSchema argSchema = getArgSchema();
-        StringArrayArg parser = argSchema.parse("-g:[String]:[]");
-        Assert.assertEquals(parser.defaultValue, new String[]{});
+        IntegerArrayArgSchema argSchema = getArgSchema();
+        IntegerArrayArg parser = argSchema.parse("-x:[Integer]:[]");
+        Assert.assertEquals(parser.defaultValue, new Integer[]{});
     }
 
-    private StringArrayArgSchema getArgSchema() {
-        return new StringArrayArgSchema();
+    private IntegerArrayArgSchema getArgSchema() {
+        return new IntegerArrayArgSchema();
     }
 
     @Override
     public void schemaNoDefaultValue() {
-        StringArrayArgSchema argSchema = getArgSchema();
-        StringArrayArg parser = argSchema.parse("-p:Port");
+        IntegerArrayArgSchema argSchema = getArgSchema();
+        IntegerArrayArg parser = argSchema.parse("-x:[Integer]");
         Assert.assertNull(parser.defaultValue);
     }
 

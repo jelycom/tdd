@@ -10,13 +10,13 @@ public class BooleanArgSchemaTest extends ArgSchemaTest{
         Assert.assertEquals(support,true);
     }
     @Override
-    public void booleanSchemaDefaultValue() {
+    public void schemaDefaultValue() {
         BooleanArgSchema argSchema = new BooleanArgSchema();
         BooleanArg parser = argSchema.parse("-l:Boolean:false");
         Assert.assertFalse(parser.defaultValue);
     }
     @Override
-    public void booleanSchemaNoDefaultValue() {
+    public void schemaNoDefaultValue() {
         BooleanArgSchema argSchema = new BooleanArgSchema();
         BooleanArg parser = argSchema.parse("-l:Boolean");
         Assert.assertNull(parser.defaultValue);

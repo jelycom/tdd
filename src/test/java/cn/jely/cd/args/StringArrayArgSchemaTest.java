@@ -2,28 +2,28 @@ package cn.jely.cd.args;
 
 import org.testng.Assert;
 
-public class PortArgSchemaTest extends ArgSchemaTest{
+public class StringArrayArgSchemaTest extends ArgSchemaTest{
     @Override
     public void schemaSupport() {
         ArgSchema argSchema = getArgSchema();
-        boolean support = argSchema.support("-p:Port:80");
+        boolean support = argSchema.support("-g:[String]:[]");
         Assert.assertEquals(support,true);
     }
     @Override
     public void schemaDefaultValue() {
-        PortArgSchema argSchema = getArgSchema();
-        PortArg parser = argSchema.parse("-p:Port:80");
-        Assert.assertEquals(parser.defaultValue, Integer.valueOf(80));
+        StringArrayArgSchema argSchema = getArgSchema();
+        StringArrayArg parser = argSchema.parse("-g:[String]:[]");
+        Assert.assertEquals(parser.defaultValue, new String[]{});
     }
 
-    private PortArgSchema getArgSchema() {
-        return new PortArgSchema();
+    private StringArrayArgSchema getArgSchema() {
+        return new StringArrayArgSchema();
     }
 
     @Override
     public void schemaNoDefaultValue() {
-        PortArgSchema argSchema = getArgSchema();
-        PortArg parser = argSchema.parse("-p:Port");
+        StringArrayArgSchema argSchema = getArgSchema();
+        StringArrayArg parser = argSchema.parse("-g:[String]");
         Assert.assertNull(parser.defaultValue);
     }
 

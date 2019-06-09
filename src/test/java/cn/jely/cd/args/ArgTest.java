@@ -12,9 +12,9 @@ public abstract class ArgTest {
 
     @Test(expectedExceptions = {IllegalStateException.class})
     public void valueIsNullButCannotBeNull() {
-        Arg arg = getArgParser();
+        Arg arg = getArg();
         arg.valid();
     }
 
-    protected abstract Arg getArgParser();
+    protected abstract <T extends Arg> T getArg();
 }

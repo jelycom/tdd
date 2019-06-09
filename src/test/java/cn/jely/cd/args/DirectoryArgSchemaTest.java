@@ -5,20 +5,25 @@ import org.testng.Assert;
 public class DirectoryArgSchemaTest extends ArgSchemaTest{
     @Override
     public void schemaSupport() {
-        ArgSchema argSchema = new DirectoryArgSchema();
-        boolean support = argSchema.support("-p:Directory:/tmp");
+        ArgSchema argSchema = getArgSchema();
+        boolean support = argSchema.support("-d:Directory:/tmp");
         Assert.assertEquals(support,true);
     }
+
+    private DirectoryArgSchema getArgSchema() {
+        return new DirectoryArgSchema();
+    }
+
     @Override
-    public void booleanSchemaDefaultValue() {
-        BooleanArgSchema argSchema = new BooleanArgSchema();
-        BooleanArg parser = argSchema.parse("-p:Directory:/tmp");
+    public void schemaDefaultValue() {
+        DirectoryArgSchema argSchema = getArgSchema();
+        DirectoryArg parser = argSchema.parse("-d:Directory:/tmp");
         Assert.assertEquals(parser.defaultValue,"/tmp");
     }
     @Override
-    public void booleanSchemaNoDefaultValue() {
-        BooleanArgSchema argSchema = new BooleanArgSchema();
-        BooleanArg parser = argSchema.parse("-p:Directory");
+    public void schemaNoDefaultValue() {
+        DirectoryArgSchema argSchema = getArgSchema();
+        DirectoryArg parser = argSchema.parse("-d:Directory");
         Assert.assertNull(parser.defaultValue);
     }
 }
