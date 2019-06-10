@@ -1,5 +1,7 @@
 package cn.jely.cd.marsrover;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Rover {
@@ -7,6 +9,9 @@ public class Rover {
     private int x;
     private int y;
     private Direction direction;
+    private List<Obstacle> obstacles = new ArrayList<>();
+    private Obstacle obstacle;
+
     public Rover(Mars mars, int x, int y, Direction direction) {
         this.mars = mars;
         this.x = x;
@@ -30,28 +35,58 @@ public class Rover {
     }
 
     public void forward(int step) {
-        direction.forward(this,step);
-    }
-
-    public void backward(int step) {
-        direction.backward(this,step);
-    }
-
-    public void addY(int step) {
-        y+=step;
-        if (y < 0) {
-            y = mars.getMaxY() + 1 + y;
-        } else if (y > mars.getMaxY()) {
-            y = y - mars.getMaxY() -1;
+        for (int i = 0; i < step; i++) {
+            direction.forward(this);
         }
     }
 
-    public void addX(int step) {
-        x+=step;
+    public void backward(int step) {
+        for (int i = 0; i < step; i++) {
+            direction.backward(this);
+        }
+    }
+
+    public void addY() {
+        setObstacleIfMatch(x, y + 1);
+        if(this.obstacle!=null) return;
+        y++;
+        if (y > mars.getMaxY()) {
+            y = 0;
+        }
+    }
+
+    private void setObstacleIfMatch(int x, int y) {
+        for (Obstacle obstacle : obstacles) {
+            if (obstacle.match(x, y)) {
+                this.obstacle = obstacle;
+            }
+        }
+    }
+
+    public void subY() {
+        setObstacleIfMatch(x, y - 1);
+        if(this.obstacle!=null) return;
+        y--;
+        if (y < 0) {
+            y = mars.getMaxY();
+        }
+    }
+
+    public void addX() {
+        setObstacleIfMatch(x+1, y);
+        if(this.obstacle!=null) return;
+        x++;
+        if (x > mars.getMaxX()) {
+            x = 0;
+        }
+    }
+
+    public void subX() {
+        setObstacleIfMatch(x-1, y);
+        if(this.obstacle!=null) return;
+        x--;
         if (x < 0) {
-            x = mars.getMaxX() + x + 1;
-        } else if (x > mars.getMaxX()) {
-            x = x - mars.getMaxX() - 1;
+            x = mars.getMaxX();
         }
     }
 
@@ -78,8 +113,15 @@ public class Rover {
                 }else{
                     throw new IllegalArgumentException("Illegal Argument" + cmd);
                 }
+                if (this.obstacle != null) {
+                    reportToEarth();
+                }
             }
         }
+    }
+
+    private void reportToEarth() {
+        System.out.println(this);
     }
 
     private int parseStep(String cmd) {
@@ -99,5 +141,9 @@ public class Rover {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public void addObstacle(Obstacle obstacle) {
+        this.obstacles.add(obstacle);
     }
 }

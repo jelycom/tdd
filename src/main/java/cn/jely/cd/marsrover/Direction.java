@@ -3,13 +3,13 @@ package cn.jely.cd.marsrover;
 public enum  Direction {
     South{
         @Override
-        public void forward(Rover rover, int step) {
-            rover.addY(-step);
+        public void forward(Rover rover) {
+            rover.subY();
         }
 
         @Override
-        public void backward(Rover rover, int step) {
-            rover.addY(step);
+        public void backward(Rover rover) {
+            rover.addY();
         }
 
         @Override
@@ -23,13 +23,13 @@ public enum  Direction {
         }
     }, North {
         @Override
-        public void forward(Rover rover, int step) {
-            rover.addY(step);
+        public void forward(Rover rover) {
+            rover.addY();
         }
 
         @Override
-        public void backward(Rover rover, int step) {
-            rover.addY(-step);
+        public void backward(Rover rover) {
+            rover.subY();
         }
 
         @Override
@@ -43,13 +43,13 @@ public enum  Direction {
         }
     }, East {
         @Override
-        public void forward(Rover rover, int step) {
-            rover.addX(step);
+        public void forward(Rover rover) {
+            rover.addX();
         }
 
         @Override
-        public void backward(Rover rover, int step) {
-            rover.addX(-step);
+        public void backward(Rover rover) {
+            rover.subX();
         }
 
         @Override
@@ -63,13 +63,13 @@ public enum  Direction {
         }
     }, West {
         @Override
-        public void forward(Rover rover, int step) {
-            rover.addX(-step);
+        public void forward(Rover rover) {
+            rover.subX();
         }
 
         @Override
-        public void backward(Rover rover, int step) {
-            rover.addX(step);
+        public void backward(Rover rover) {
+            rover.addX();
         }
 
         @Override
@@ -83,13 +83,13 @@ public enum  Direction {
         }
     };
 
-    public abstract void forward(Rover rover, int step);
+    public abstract void forward(Rover rover);
 
     Direction() {
 
     }
 
-    public abstract void backward(Rover rover, int step);
+    public abstract void backward(Rover rover);
 
     public abstract void turnLeft(Rover rover);
 

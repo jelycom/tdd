@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import javax.management.OperationsException;
+
 public class RoverTest {
 
     private final Mars mars = new Mars(100000, 100000);
@@ -90,5 +92,12 @@ public class RoverTest {
     public void executeOutBoundary(Rover origin,String command,Rover expected) {
         origin.execute(command);
         Assert.assertEquals(origin,expected);
+    }
+    @Test
+    public void executeCmdWhenAnyObstacleThenInterruptExecute(){
+        Rover rover = new Rover(mars, 200, 200, Direction.North);
+        rover.addObstacle(new Obstacle(200,202));
+        rover.execute("F,3");
+        Assert.assertEquals(rover, new Rover(mars, 200, 201, Direction.North));
     }
 }
