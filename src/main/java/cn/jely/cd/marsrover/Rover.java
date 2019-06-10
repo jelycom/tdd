@@ -102,21 +102,25 @@ public class Rover {
         if (command != null && !command.trim().isEmpty()) {
             String[] cmds = command.split(":");
             for (String cmd : cmds) {
-                if ("L".equals(cmd)) {
-                    turnLeft();
-                } else if ("R".equals(cmd)) {
-                    turnRight();
-                } else if (cmd.startsWith("F,")) {
-                    forward(parseStep(cmd));
-                } else if (cmd.startsWith("B,")) {
-                    backward(parseStep(cmd));
-                }else{
-                    throw new IllegalArgumentException("Illegal Argument" + cmd);
-                }
+                executeSingle(cmd);
                 if (this.obstacle != null) {
                     reportToEarth();
                 }
             }
+        }
+    }
+
+    private void executeSingle(String cmd) {
+        if ("L".equals(cmd)) {
+            turnLeft();
+        } else if ("R".equals(cmd)) {
+            turnRight();
+        } else if (cmd.startsWith("F,")) {
+            forward(parseStep(cmd));
+        } else if (cmd.startsWith("B,")) {
+            backward(parseStep(cmd));
+        }else{
+            throw new IllegalArgumentException("Illegal Argument" + cmd);
         }
     }
 
