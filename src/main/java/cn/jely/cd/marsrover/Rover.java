@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class Rover {
+    public static final String TURNLEFT = "L";
+    public static final String TURNRIGHT = "R";
+    public static final String FORWARD = "F,";
+    public static final String BACKWARD = "B,";
     private Mars mars;
     private int x;
     private int y;
@@ -111,13 +115,13 @@ public class Rover {
     }
 
     private void executeSingle(String cmd) {
-        if ("L".equals(cmd)) {
+        if (TURNLEFT.equals(cmd)) {
             turnLeft();
-        } else if ("R".equals(cmd)) {
+        } else if (TURNRIGHT.equals(cmd)) {
             turnRight();
-        } else if (cmd.startsWith("F,")) {
+        } else if (cmd.startsWith(FORWARD)) {
             forward(parseStep(cmd));
-        } else if (cmd.startsWith("B,")) {
+        } else if (cmd.startsWith(BACKWARD)) {
             backward(parseStep(cmd));
         }else{
             throw new IllegalArgumentException("Illegal Argument" + cmd);
